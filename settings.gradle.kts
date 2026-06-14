@@ -23,5 +23,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "BinderWork"
-include(":app")
-include(":newclient")
+include(":module_aidl")
+include(":module_server")
+include(":module_client")
