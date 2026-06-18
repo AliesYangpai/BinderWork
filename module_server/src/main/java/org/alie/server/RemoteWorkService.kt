@@ -24,6 +24,15 @@ class RemoteWorkService : Service() {
                 return (a+b ) *10
             }
 
+            override fun getUserInfoList(): List<IUserInfo?>? {
+                val list = listOf(
+                    IUserInfo("tom", 12, "this is a cat"),
+                    IUserInfo("jerry", 12, "this is a mouse"),
+                    IUserInfo("lucas", 12, "this is a dog"))
+                Log.i(tag,"binderwork server getUserInfoList size:${list.size}")
+                return list
+            }
+
             override fun getScore(iUserInfo: IUserInfo?): Int {
                 Log.i(tag,"binderwork server getScore iUserInfo:$iUserInfo")
                 return 87

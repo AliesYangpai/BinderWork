@@ -64,5 +64,9 @@ class MainActivity : AppCompatActivity() {
                 )
             ).toString()
         }
+
+        mBinding.btn5.setOnClickListener {
+            mBinding.tv1.text = proxy?.userInfoList?.get(0)?.introduction
+        }
     }
 }

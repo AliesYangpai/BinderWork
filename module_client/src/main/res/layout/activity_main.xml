@@ -52,4 +52,12 @@
         android:text="getNewScore"
         />
 
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/btn4"
+        app:layout_constraintTop_toBottomOf="@id/btn4"
+        android:text="getUserInfoList"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

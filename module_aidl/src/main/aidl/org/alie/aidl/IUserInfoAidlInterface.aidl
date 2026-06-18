@@ -7,4 +7,5 @@ interface IUserInfoAidlInterface {
     int add(int a,int b);
     int getScore(in IUserInfo iUserInfo);
     int getNewScore(in List<IUserInfo> list);
+    List<IUserInfo> getUserInfoList();
 }
