@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import org.alie.aidl.ICommonCallback
 import org.alie.aidl.IUserInfo
 import org.alie.aidl.IUserInfoAidlInterface
 import org.alie.client.databinding.ActivityMainBinding
@@ -67,6 +68,19 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.btn5.setOnClickListener {
             mBinding.tv1.text = proxy?.userInfoList?.get(0)?.introduction
+        }
+        mBinding.btn6.setOnClickListener {
+             proxy?.workToGetUserInfoList(object : ICommonCallback.Stub() {
+                override fun onSuccess(dataMsg: String?) {
+                        mBinding.tv1.text = dataMsg
+                }
+
+
+                 override fun onFail(msgMsg: String?) {
+                     mBinding.tv1.text = msgMsg
+                 }
+
+             })
         }
     }
 }

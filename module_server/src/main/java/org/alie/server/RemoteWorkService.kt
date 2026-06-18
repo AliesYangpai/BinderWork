@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+import org.alie.aidl.ICommonCallback
 import org.alie.aidl.IUserInfo
 import org.alie.aidl.IUserInfoAidlInterface
 
@@ -31,6 +32,15 @@ class RemoteWorkService : Service() {
                     IUserInfo("lucas", 12, "this is a dog"))
                 Log.i(tag,"binderwork server getUserInfoList size:${list.size}")
                 return list
+            }
+
+            override fun workToGetUserInfoList(iCommonCallback: ICommonCallback?) {
+
+                val list = listOf(
+                    IUserInfo("tommmm", 12, "this is a cat"),
+                    IUserInfo("jerryyy", 12, "this is a mouse"),
+                    IUserInfo("lucassss", 12, "this is a dog"))
+                iCommonCallback?.onSuccess(list[0].name)
             }
 
             override fun getScore(iUserInfo: IUserInfo?): Int {
