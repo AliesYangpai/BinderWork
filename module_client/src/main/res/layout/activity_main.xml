@@ -34,5 +34,14 @@
         android:text="调用远程服务的add方法"
         />
 
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/btn2"
+        app:layout_constraintTop_toBottomOf="@id/btn2"
+        android:text="getScore"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

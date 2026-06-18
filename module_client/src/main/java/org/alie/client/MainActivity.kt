@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import org.alie.aidl.IUserInfo
 import org.alie.aidl.IUserInfoAidlInterface
 import org.alie.client.databinding.ActivityMainBinding
 
@@ -22,14 +23,10 @@ class MainActivity : AppCompatActivity() {
     private var proxy: IUserInfoAidlInterface? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
 
 
         mBinding.btn1.setOnClickListener {
@@ -42,17 +39,21 @@ class MainActivity : AppCompatActivity() {
                     iBinder: IBinder?
                 ) {
                     proxy = IUserInfoAidlInterface.Stub.asInterface(iBinder)
-                    Log.i(tag, "onServiceConnected proxy : $proxy")
+                    Log.i(tag, "binderwork client onServiceConnected proxy : $proxy")
                 }
 
                 override fun onServiceDisconnected(p0: ComponentName?) {
-                    Log.i(tag, "onServiceDisconnected ")
+                    Log.i(tag, "binderwork client onServiceDisconnected ")
                 }
             }, Context.BIND_AUTO_CREATE)
         }
 
         mBinding.btn2.setOnClickListener {
             mBinding.tv1.text = proxy?.add(5,9).toString()
+        }
+
+        mBinding.btn3.setOnClickListener {
+            mBinding.tv1.text = proxy?.getScore(IUserInfo("tom",12,"this is a cat")).toString()
         }
     }
 }
