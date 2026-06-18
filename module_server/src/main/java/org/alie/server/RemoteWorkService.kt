@@ -28,6 +28,11 @@ class RemoteWorkService : Service() {
                 Log.i(tag,"binderwork server getScore iUserInfo:$iUserInfo")
                 return 87
             }
+
+            override fun getNewScore(list: List<IUserInfo?>?): Int {
+                Log.i(tag,"binderwork server getNewScore listSize:${list?.size}")
+                return 88
+            }
         }
     }
 }

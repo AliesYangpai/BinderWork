@@ -49,11 +49,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         mBinding.btn2.setOnClickListener {
-            mBinding.tv1.text = proxy?.add(5,9).toString()
+            mBinding.tv1.text = proxy?.add(5, 9).toString()
         }
 
         mBinding.btn3.setOnClickListener {
-            mBinding.tv1.text = proxy?.getScore(IUserInfo("tom",12,"this is a cat")).toString()
+            mBinding.tv1.text = proxy?.getScore(IUserInfo("tom", 12, "this is a cat")).toString()
+        }
+        mBinding.btn4.setOnClickListener {
+            mBinding.tv1.text = proxy?.getNewScore(
+                listOf(
+                    IUserInfo("tom", 12, "this is a cat"),
+                    IUserInfo("jerry", 12, "this is a mouse"),
+                    IUserInfo("gether", 12, "this is a dag")
+                )
+            ).toString()
         }
     }
 }
