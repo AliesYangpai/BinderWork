@@ -10,4 +10,5 @@ interface IUserInfoAidlInterface {
     int getNewScore(in List<IUserInfo> list);
     List<IUserInfo> getUserInfoList();
     void workToGetUserInfoList(ICommonCallback iCommonCallback);
+    oneway void requestUsers(in IUserInfo iUserInfo, ICommonCallback iCommonCallback);
 }

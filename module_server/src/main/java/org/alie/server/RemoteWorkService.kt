@@ -12,25 +12,26 @@ class RemoteWorkService : Service() {
     private var tag = RemoteWorkService::class.java.toString()
 
     override fun onCreate() {
-        Log.i(tag,"binderwork server onCreate")
+        Log.i(tag, "binderwork server onCreate")
         super.onCreate()
     }
 
     override fun onBind(intent: Intent): IBinder {
-        Log.i(tag,"binderwork server onBind")
+        Log.i(tag, "binderwork server onBind")
         return object : IUserInfoAidlInterface.Stub() {
             override fun add(a: Int, b: Int): Int {
 
-                Log.i(tag,"binderwork server add a:$a b:$b")
-                return (a+b ) *10
+                Log.i(tag, "binderwork server add a:$a b:$b")
+                return (a + b) * 10
             }
 
             override fun getUserInfoList(): List<IUserInfo?>? {
                 val list = listOf(
                     IUserInfo("tom", 12, "this is a cat"),
                     IUserInfo("jerry", 12, "this is a mouse"),
-                    IUserInfo("lucas", 12, "this is a dog"))
-                Log.i(tag,"binderwork server getUserInfoList size:${list.size}")
+                    IUserInfo("lucas", 12, "this is a dog")
+                )
+                Log.i(tag, "binderwork server getUserInfoList size:${list.size}")
                 return list
             }
 
@@ -39,17 +40,26 @@ class RemoteWorkService : Service() {
                 val list = listOf(
                     IUserInfo("tommmm", 12, "this is a cat"),
                     IUserInfo("jerryyy", 12, "this is a mouse"),
-                    IUserInfo("lucassss", 12, "this is a dog"))
+                    IUserInfo("lucassss", 12, "this is a dog")
+                )
                 iCommonCallback?.onSuccess(list[0].name)
             }
 
+            override fun requestUsers(
+                iUserInfo: IUserInfo?,
+                iCommonCallback: ICommonCallback?
+            ) {
+                val iUserInfo = IUserInfo("lucassss", 12, "this is a dog")
+                iCommonCallback?.onSuccess(iUserInfo.name)
+            }
+
             override fun getScore(iUserInfo: IUserInfo?): Int {
-                Log.i(tag,"binderwork server getScore iUserInfo:$iUserInfo")
+                Log.i(tag, "binderwork server getScore iUserInfo:$iUserInfo")
                 return 87
             }
 
             override fun getNewScore(list: List<IUserInfo?>?): Int {
-                Log.i(tag,"binderwork server getNewScore listSize:${list?.size}")
+                Log.i(tag, "binderwork server getNewScore listSize:${list?.size}")
                 return 88
             }
         }

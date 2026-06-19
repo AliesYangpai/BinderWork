@@ -82,5 +82,16 @@ class MainActivity : AppCompatActivity() {
 
              })
         }
+        mBinding.btn7.setOnClickListener {
+            proxy?.requestUsers(
+                IUserInfo("tom", 12, "this is a cat"), object : ICommonCallback.Stub() {
+                    override fun onSuccess(dataMsg: String?) {
+                        mBinding.tv1.text = dataMsg
+                    }
+
+                    override fun onFail(msgMsg: String?) {
+                    }
+                })
+        }
     }
 }
