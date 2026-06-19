@@ -1,0 +1,48 @@
+# ---------- Gradle ----------
+.gradle/
+**/build/
+!src/**/build/
+
+# ---------- IDE ----------
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ---------- Android / SDK ----------
+local.properties
+*.apk
+*.aab
+*.dex
+*.ap_
+*.dex
+
+# ---------- Kotlin / Java ----------
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+*.ear
+*.nar
+
+# ---------- macOS ----------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ---------- Misc ----------
+*.log
+*.tmp
+*.bak
+/native-build/
+/captures/
+.externalNativeBuild/
+.cxx/
