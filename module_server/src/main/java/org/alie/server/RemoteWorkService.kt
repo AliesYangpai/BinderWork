@@ -4,13 +4,22 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.alie.aidl.ICommonCallback
 import org.alie.aidl.IUserInfo
 import org.alie.aidl.IUserInfoAidlInterface
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentMap
 
 class RemoteWorkService : Service() {
     private var tag = RemoteWorkService::class.java.toString()
-
+    private val serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private val taskMap = ConcurrentHashMap<ICommonCallback?, Job>()
     override fun onCreate() {
         Log.i(tag, "binderwork server onCreate")
         super.onCreate()
@@ -51,6 +60,24 @@ class RemoteWorkService : Service() {
             ) {
                 val iUserInfo = IUserInfo("lucassss", 12, "this is a dog")
                 iCommonCallback?.onSuccess(iUserInfo.name)
+            }
+
+            override fun requestUsersflow(
+                iUserInfo: IUserInfo?,
+                iCommonCallback: ICommonCallback?
+            ) {
+                taskMap[iCommonCallback]?.cancel()
+                val job = serviceScope.launch {
+                    val iUserInfo = IUserInfo("john work", 12, "this is a dog")
+                    delay(300)
+                    iCommonCallback?.onSuccess(iUserInfo.name)
+                    taskMap.remove(iCommonCallback)
+                }
+                taskMap[iCommonCallback] = job
+            }
+
+            override fun cancelRequestUsersflow(iCommonCallback: ICommonCallback?) {
+                    taskMap.remove(iCommonCallback)?.cancel()
             }
 
             override fun getScore(iUserInfo: IUserInfo?): Int {

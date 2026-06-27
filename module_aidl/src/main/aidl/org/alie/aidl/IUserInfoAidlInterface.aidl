@@ -11,4 +11,6 @@ interface IUserInfoAidlInterface {
     List<IUserInfo> getUserInfoList();
     void workToGetUserInfoList(ICommonCallback iCommonCallback);
     oneway void requestUsers(in IUserInfo iUserInfo, ICommonCallback iCommonCallback);
+    oneway void requestUsersflow(in IUserInfo iUserInfo, ICommonCallback iCommonCallback);
+    oneway void cancelRequestUsersflow(ICommonCallback iCommonCallback);
 }
